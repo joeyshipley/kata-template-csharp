@@ -1,38 +1,65 @@
-﻿using StructureMap;
+﻿using System;
+using System.Collections.Generic;
+using Kata.App.ExampleClasses;
+using StructureMap;
 
 namespace Kata.App.Infastructure
 {
     public class IoCConfiguration
     {
-        public static IContainer Build()
+        public static void ConfigureObjectFactory()
         {
-            var container = configureDependencies();
-            return container;
+            configureDependencies();
+        }
+
+        public static IContainer BuildContainer()
+        {
+            return configureDependencies();
         }
 
         private static IContainer configureDependencies()
+        {
+            var assemblies = new List<string>
+            {
+                "Kata.App"
+            };
+            var customMappings = new List<Action<ConfigurationExpression>>
+            {
+                // (x => x.For<IClassB>().Use<ClassB>()) // Custom Mapping Example
+            };
+
+            configureObjectFactory(assemblies, customMappings);
+            var container = configureContainer(assemblies, customMappings);
+            return container;
+        }
+
+        private static void configureObjectFactory(List<string> assemblies, List<Action<ConfigurationExpression>> customMappings)
         {
             ObjectFactory.Configure(x =>
             {
                 x.Scan(scan =>
                 {
                     scan.LookForRegistries();
-                    scan.Assembly("Kata.App");
+                    assemblies.ForEach(scan.Assembly);
                     scan.WithDefaultConventions();
                 });
-                // x.For<IClassB>().Use<ClassB>();
+                customMappings.ForEach(mapping => mapping(x));
             });
+        }
 
+        private static IContainer configureContainer(List<string> assemblies, List<Action<ConfigurationExpression>> customMappings)
+        {
             return new Container(x =>
             {
                 x.Scan(scan =>
                 {
                     scan.LookForRegistries();
-                    scan.Assembly("Kata.App");
+                    assemblies.ForEach(scan.Assembly);
                     scan.WithDefaultConventions();
                 });
-                // x.For<IClassB>().Use<ClassB>();
+                customMappings.ForEach(mapping => mapping(x));
             });
+
         }
     }
 }

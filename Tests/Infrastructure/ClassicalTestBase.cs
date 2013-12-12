@@ -11,7 +11,7 @@ namespace Kata.Tests.Infrastructure
         [TestInitialize]
         public void Init()
         {
-            var container = IoCConfiguration.Build();
+            var container = IoCConfiguration.BuildContainer();
             SUT = container.GetInstance<T>();
 
             Arrange();
