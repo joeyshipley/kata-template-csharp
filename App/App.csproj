@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExampleClasses\ClassC.cs" />
     <Compile Include="Infastructure\IoCConfiguration.cs" />
     <Compile Include="ExampleClasses\ClassA.cs" />
     <Compile Include="ExampleClasses\ClassB.cs" />

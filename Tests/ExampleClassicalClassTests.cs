@@ -47,4 +47,24 @@ namespace ExampleClassicalClassTests
             _result.Should().Be("rawr");
         }
     }
+
+    [TestClass]
+    public class When_making_the_animal_speak
+        : ClassicalTestBase<ClassA>
+    {
+        string _result;
+
+        public override void Arrange() {}
+
+        public override void Act() 
+        {
+            _result = SUT.Speak();
+        }
+
+        [TestMethod]
+        public void It_actually_speaks_to_us()
+        {
+            _result.Should().NotBeEmpty();
+        }
+    }
 }

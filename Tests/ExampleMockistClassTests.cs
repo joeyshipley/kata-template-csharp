@@ -49,4 +49,29 @@ namespace ExampleMockistClassTests
             _result.Should().Be("rawr");
         }
     }
+    
+    [TestClass]
+    public class When_making_the_animal_speak
+        : MockistTestBase<ClassA>
+    {
+        string _result;
+
+        public override void Arrange() 
+        {
+            Mocks.GetMock<AbilityToSpeak>()
+                .Setup(m => m.Speak())
+                .Returns("Meow");
+        }
+
+        public override void Act() 
+        {
+            _result = SUT.Speak();
+        }
+
+        [TestMethod]
+        public void It_actually_speaks_to_us()
+        {
+            _result.Should().NotBeEmpty();
+        }
+    }
 }

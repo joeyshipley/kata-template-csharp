@@ -19,17 +19,17 @@ namespace Kata.App.Infastructure
 
         private static IContainer configureDependencies()
         {
-            var assemblies = new List<string>
+            var assembliesToScan = new List<string>
             {
                 "Kata.App"
             };
             var customMappings = new List<Action<ConfigurationExpression>>
             {
-                // (x => x.For<IClassB>().Use<ClassB>()) // Custom Mapping Example
+                (x => x.For<AbilityToSpeak>().Use<ClassC>()) // Custom Mapping Example
             };
 
-            configureObjectFactory(assemblies, customMappings);
-            var container = configureContainer(assemblies, customMappings);
+            configureObjectFactory(assembliesToScan, customMappings);
+            var container = configureContainer(assembliesToScan, customMappings);
             return container;
         }
 
