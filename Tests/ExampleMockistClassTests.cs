@@ -19,7 +19,7 @@ namespace ExampleMockistClassTests
         }
 
         [TestMethod]
-        public void It_returns_the_message_that_was_set()
+        public void It_does_not_return_a_message()
         {
             _result.Should().BeNull();
         }
