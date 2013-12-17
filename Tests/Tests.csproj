@@ -80,10 +80,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ExampleClassicalClassTests.cs" />
+    <Compile Include="ExampleTests\ExampleClassicalClassTests.cs" />
     <Compile Include="Infrastructure\ClassicalTestBase.cs" />
     <Compile Include="Infrastructure\MockistTestBase.cs" />
-    <Compile Include="ExampleMockistClassTests.cs" />
+    <Compile Include="ExampleTests\ExampleMockistClassTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
